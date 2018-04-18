@@ -38,8 +38,14 @@ public class Game{
 	//ModelTexture texture = staticModel.getTexture();
         TexturedModel fern = new TexturedModel(ObjLoader.loadObjModel("fern", loader),
                 new ModelTexture(loader.loadTexture("leaf")));
-	//Entity entity = new Entity(staticModel, new Vector3f(0,10,0),0,0,0,1);
-	Light light = new Light(new Vector3f(3000,2000, 2000), new Vector3f(1,1,1));
+        TexturedModel tree = new TexturedModel(ObjLoader.loadObjModel("tree", loader),
+                new ModelTexture(loader.loadTexture("tree")));
+	grass.getTexture().setHasTransparency(true);
+        grass.getTexture().setUseFakeLighting(true);
+        fern.getTexture().setHasTransparency(true);
+        //tree.getTexture().setUseFakeLighting(true);
+        //Entity entity = new Entity(staticModel, new Vector3f(0,10,0),0,0,0,1);
+	Light light = new Light(new Vector3f(3000,2000,2000), new Vector3f(1,1,1));
         //entity.setRotY(180);
         
         Terrain terrain = new Terrain(0,0,loader,new ModelTexture(loader.loadTexture("grass")));
@@ -49,7 +55,8 @@ public class Game{
         List<Entity> entities = new ArrayList<Entity>();
         Random random = new Random();
         for(int i = 0; i < 50; i++) {
-  
+            entities.add(new Entity(tree, new Vector3f(random.nextFloat() * 400, 0,
+                random.nextFloat() * 400), 0, 0, 0, 7));
             entities.add(new Entity(grass, new Vector3f(random.nextFloat() * 400, 0,
                 random.nextFloat() * 400), 0, 0, 0, 5));
             entities.add(new Entity(fern, new Vector3f(random.nextFloat() * 400, 0,
